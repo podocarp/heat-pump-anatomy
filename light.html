@@ -142,24 +142,27 @@ svg[data-mode="heat"] .air.a-odu.air-in, svg[data-mode="cool"] .air.a-idu.air-in
 .pad-temp { display: flex; align-items: center; padding: 0 10px; font-size: 10.5px; color: var(--anatomy-muted); letter-spacing: 0.08em; text-transform: uppercase; border-right: 1px solid var(--anatomy-faint); }
 .explain { margin: 12px auto 0; max-width: 640px; font-size: 13.5px; line-height: 1.55; color: var(--anatomy-muted); min-height: 3.4em; }
 .explain b { color: var(--anatomy-text); font-weight: 600; }
-.ph-wrap { margin: 14px auto 0; max-width: 420px; }
+.ph-wrap { margin: 14px auto 0; max-width: 560px; }
 .ph-cap { display: block; font-size: 10.5px; color: var(--anatomy-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; text-align: center; }
 .ph { width: 100%; height: auto; display: block; }
-.ph .ph-t { font-size: 8px; fill: var(--anatomy-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.ph .ph-t { font-size: 10px; fill: var(--anatomy-muted); letter-spacing: 0.08em; text-transform: uppercase; }
 .ph .ph-dome { fill: none; stroke: var(--anatomy-lo); stroke-width: 1.6; }
 .ph .ph-c { fill: none; stroke-width: 2.6; stroke-linecap: round; }
 .ph .ph-cond { stroke: var(--anatomy-red); }
 .ph .ph-evap { stroke: var(--anatomy-blue); }
 .ph .ph-exp { stroke: var(--anatomy-blue); stroke-dasharray: 3 3; }
 .ph .ph-comp { stroke: var(--anatomy-red); }
-.ph .ph-l { font-size: 8px; fill: var(--anatomy-muted); }
-.ph .ph-reg { font-size: 7.5px; fill: var(--anatomy-lo); font-style: italic; }
+.ph .ph-l { font-size: 9px; fill: var(--anatomy-muted); }
+.ph .ph-heat { font-size: 9px; font-weight: 600; }
+.ph .ph-heat-out { fill: var(--anatomy-red); }
+.ph .ph-heat-in { fill: var(--anatomy-blue); }
+.ph .ph-reg { font-size: 9px; fill: var(--anatomy-lo); font-style: italic; }
 .ph .ph-crit { fill: var(--anatomy-lo); }
-.ph .ph-crit-l { font-size: 7px; fill: var(--anatomy-lo); }
+.ph .ph-crit-l { font-size: 8.5px; fill: var(--anatomy-lo); }
 .ph .ph-tk { fill: none; stroke: var(--anatomy-red); stroke-width: 0.9; opacity: 0.5; }
 .ph .ph-to { fill: none; stroke: var(--anatomy-blue); stroke-width: 0.9; opacity: 0.5; }
-.ph .ph-tk-l { font-size: 7.5px; fill: var(--anatomy-red); font-style: italic; opacity: 0.8; }
-.ph .ph-to-l { font-size: 7.5px; fill: var(--anatomy-blue); font-style: italic; opacity: 0.8; }
+.ph .ph-tk-l { font-size: 9px; fill: var(--anatomy-red); font-style: italic; opacity: 0.8; }
+.ph .ph-to-l { font-size: 9px; fill: var(--anatomy-blue); font-style: italic; opacity: 0.8; }
 .ph .ph-a { stroke: none; }
 .ph .ph-a-cond, .ph .ph-a-comp { fill: var(--anatomy-red); }
 .ph .ph-a-evap, .ph .ph-a-exp { fill: var(--anatomy-blue); }
@@ -181,30 +184,32 @@ svg[data-mode="heat"] .air.a-odu.air-in, svg[data-mode="cool"] .air.a-idu.air-in
 </div>
 <div class="explain" data-explain></div>
 <div class="ph-wrap"><span class="ph-cap">pressure–enthalpy · the dome hides liquid from vapour; the marker walks the four steps</span>
-<svg class="ph" viewBox="0 0 240 150" aria-hidden="true">
-  <text class="ph-t" x="8" y="13">pressure</text>
-  <text class="ph-t" x="232" y="146" text-anchor="end">enthalpy</text>
-  <path class="ph-dome" d="M52,120 C58,72 84,44 118,42 C152,44 176,74 182,120"/>
-  <circle class="ph-crit" cx="124" cy="42.5" r="1.4"/>
-  <text class="ph-crit-l" x="130" y="38">critical point</text>
-  <text class="ph-reg" x="46" y="134">liquid</text>
-  <text class="ph-reg" x="117" y="96" text-anchor="middle">liquid + vapour</text>
-  <text class="ph-reg" x="196" y="134" text-anchor="end">vapour</text>
-  <path class="ph-tk" d="M40,60 Q70,52 90,52 L146,52 Q176,54 196,74"/>
-  <path class="ph-to" id="ph-to" d="M40,118 Q70,112 90,112 L146,112 Q176,114 196,130"/>
-  <text class="ph-tk-l" x="196" y="70" text-anchor="end">T hot</text>
-  <text class="ph-to-l" id="ph-to-l" x="196" y="128" text-anchor="end">T cold</text>
-  <path class="ph-c ph-cond" d="M172,52 L104,52"/>
-  <path class="ph-c ph-exp" id="ph-exp" d="M104,52 L104,112"/>
-  <path class="ph-c ph-evap" id="ph-evap" d="M104,112 L160,112"/>
-  <path class="ph-c ph-comp" id="ph-comp" d="M160,112 L172,52"/>
-  <path class="ph-a ph-a-cond" d="M-2.6,-2.2 L2.8,0 L-2.6,2.2 Z" transform="translate(138 52) rotate(180)"/>
-  <path class="ph-a ph-a-exp" d="M-2.6,-2.2 L2.8,0 L-2.6,2.2 Z" transform="translate(104 82) rotate(90)"/>
-  <path class="ph-a ph-a-evap" d="M-2.6,-2.2 L2.8,0 L-2.6,2.2 Z" transform="translate(132 112) rotate(0)"/>
-  <path class="ph-a ph-a-comp" d="M-2.6,-2.2 L2.8,0 L-2.6,2.2 Z" transform="translate(166 82) rotate(-80)"/>
-  <text class="ph-l ph-lh" id="ph-lh" x="196" y="42" text-anchor="end">condenses · heat out · indoor coil</text>
-  <text class="ph-l ph-ll" id="ph-ll" x="196" y="124" text-anchor="end">evaporates · heat in · outdoor coil</text>
-  <circle class="ph-m" id="ph-m" cx="160" cy="112" r="3.2"/>
+<svg class="ph" viewBox="0 0 320 200" aria-hidden="true">
+  <text class="ph-t" x="8" y="14">pressure</text>
+  <text class="ph-t" x="312" y="196" text-anchor="end">enthalpy</text>
+  <path class="ph-dome" d="M95,172 C99,112 114,58 150,47 C188,58 232,112 262,172"/>
+  <circle class="ph-crit" cx="150" cy="47" r="1.6"/>
+  <text class="ph-crit-l" x="136" y="38" text-anchor="end">critical point</text>
+  <text class="ph-reg" x="52" y="162">liquid</text>
+  <text class="ph-reg" x="160" y="92" text-anchor="middle">liquid + vapour</text>
+  <text class="ph-reg" x="298" y="162" text-anchor="end">vapour</text>
+  <path class="ph-tk" d="M40,74 Q85,60 115,60 L228,60 Q262,66 300,94"/>
+  <path class="ph-to" id="ph-to" d="M40,121 Q85,111 115,111 L205,111 Q250,117 300,145"/>
+  <text class="ph-tk-l" x="298" y="90" text-anchor="end">T hot</text>
+  <text class="ph-to-l" id="ph-to-l" x="298" y="141" text-anchor="end">T cold</text>
+  <path class="ph-c ph-cond" d="M228,60 L120,60"/>
+  <path class="ph-c ph-exp" id="ph-exp" d="M120,60 L120,111"/>
+  <path class="ph-c ph-evap" id="ph-evap" d="M120,111 L191,111"/>
+  <path class="ph-c ph-comp" id="ph-comp" d="M191,111 L228,60"/>
+  <path class="ph-a ph-a-cond" d="M-3.2,-2.6 L3.4,0 L-3.2,2.6 Z" transform="translate(174 60) rotate(180)"/>
+  <path class="ph-a ph-a-exp" id="ph-a-exp" d="M-3.2,-2.6 L3.4,0 L-3.2,2.6 Z" transform="translate(120 86) rotate(90)"/>
+  <path class="ph-a ph-a-evap" id="ph-a-evap" d="M-3.2,-2.6 L3.4,0 L-3.2,2.6 Z" transform="translate(156 111) rotate(0)"/>
+  <path class="ph-a ph-a-comp" id="ph-a-comp" d="M-3.2,-2.6 L3.4,0 L-3.2,2.6 Z" transform="translate(210 86) rotate(-54)"/>
+  <text class="ph-heat ph-heat-out" x="160" y="50" text-anchor="middle">heat out</text>
+  <text class="ph-heat ph-heat-in" id="ph-heat-in" x="156" y="124" text-anchor="middle">heat in</text>
+  <text class="ph-l ph-lh" id="ph-lh" x="298" y="52" text-anchor="end">condenses · indoor coil</text>
+  <text class="ph-l ph-ll" id="ph-ll" x="298" y="115" text-anchor="end">evaporates · outdoor coil</text>
+  <circle class="ph-m" id="ph-m" cx="191" cy="111" r="3.6"/>
 </svg></div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key"><svg class="iso-swatch" data-mark="red" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>Red: hot high-pressure gas · blue: cold low-pressure liquid</span><span class="iso-key"><svg class="iso-swatch" data-mark="raised" viewBox="0 0 16 10" aria-hidden="true"><path d="M2 4.5 8 1.5 14 4.5 14 6 8 9 2 6Z"/><path class="iso-swatch-crease" d="M2 4.5 8 7.5 14 4.5"/></svg>◀ ▶ or keys 1-4: compress, condense, expand, evaporate — the rest dims</span><span class="iso-key"><svg class="iso-swatch" data-mark="dotted" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>Chevrons ride the pipes; air arrows show heat leaving or entering a coil</span></span><span class="iso-caption">A vapour-compression loop that can run either way. The cycle is four steps: the compressor squeezes low-pressure gas until it is hot; the gas gives up its heat in one coil and condenses to liquid; the expansion valve drops the pressure and the refrigerant turns cold; the cold liquid boils in the other coil, absorbing heat from the air. Keys 1-4 light each step in turn. The four-way valve decides which coil plays the condenser and which the evaporator, so the same loop heats or cools.</span></figcaption></figure></main><script type="module">
 function copHeat(t) { return Math.max(1.8, 2.0 + 0.1045 * (t + 15)); }
 function eerCool(t) { return Math.min(4.6, Math.max(2.6, 4.4 - 0.055 * (t - 7))); }
@@ -215,7 +220,8 @@ const stage = document.querySelector(".iso-stage");
 const explain = document.querySelector("[data-explain]");
 const ph = {
   to: document.getElementById("ph-to"), tol: document.getElementById("ph-to-l"),
-  aevap: document.querySelector(".ph-a-evap"), aexp: document.querySelector(".ph-a-exp"),
+  aevap: document.getElementById("ph-a-evap"), aexp: document.getElementById("ph-a-exp"),
+  acomp: document.getElementById("ph-a-comp"), hin: document.getElementById("ph-heat-in"),
   exp: document.getElementById("ph-exp"),
   evap: document.getElementById("ph-evap"), comp: document.getElementById("ph-comp"),
   lh: document.getElementById("ph-lh"), ll: document.getElementById("ph-ll"),
@@ -295,26 +301,31 @@ function explainText() {
   explain.innerHTML = "<b>" + title + "</b> " + e[mode];
 }
 function drawPh() {
-  const yc = 100 - temp * 0.6;            // cold isobar: colder outside = lower pressure (lower on the chart)
-  const xe = 150 + temp * 0.55;           // vapour leaves the cold coil
-  ph.to.setAttribute("d", "M40," + (yc + 6).toFixed(1) + " Q70," + yc + " 90," + yc + " L146," + yc + " Q176," + (yc + 2).toFixed(1) + " 196," + (yc + 18).toFixed(1));
-  ph.tol.setAttribute("y", (yc + 16).toFixed(1));
-  ph.exp.setAttribute("d", "M104,52 L104," + yc);
-  ph.evap.setAttribute("d", "M104," + yc + " L" + xe + "," + yc);
-  ph.comp.setAttribute("d", "M" + xe + "," + yc + " L172,52");
-  ph.ll.setAttribute("y", (yc + 12).toFixed(1));
-  ph.aevap.setAttribute("transform", "translate(132 " + yc.toFixed(1) + ") rotate(0)");
-  ph.aexp.setAttribute("transform", "translate(104 " + ((52 + yc) / 2).toFixed(1) + ") rotate(90)");
+  const yc = 120 - temp * 1.2;            // cold isobar: colder outside = lower pressure (lower on the chart)
+  const xe = 198 - temp * 1.0;            // vapour leaves the cold coil at the saturated-vapour leg
+  ph.to.setAttribute("d", "M40," + (yc + 10).toFixed(1) + " Q85," + yc + " 115," + yc + " L205," + yc + " Q250," + (yc + 6).toFixed(1) + " 300," + (yc + 34).toFixed(1));
+  ph.tol.setAttribute("y", (yc + 30).toFixed(1));
+  ph.exp.setAttribute("d", "M120,60 L120," + yc.toFixed(1));
+  ph.evap.setAttribute("d", "M120," + yc.toFixed(1) + " L" + xe.toFixed(1) + "," + yc.toFixed(1));
+  ph.comp.setAttribute("d", "M" + xe.toFixed(1) + "," + yc.toFixed(1) + " L228,60");
+  ph.ll.setAttribute("y", (yc + 4).toFixed(1));
+  ph.hin.setAttribute("y", (yc + 13).toFixed(1));
+  ph.aexp.setAttribute("transform", "translate(120 " + ((60 + yc) / 2).toFixed(1) + ") rotate(90)");
+  ph.aevap.setAttribute("transform", "translate(" + ((120 + xe) / 2).toFixed(1) + " " + yc.toFixed(1) + ") rotate(0)");
+  const mx = (xe + 228) / 2, my = (yc + 60) / 2;
+  const ang = Math.atan2(60 - yc, 228 - xe) * 180 / Math.PI;
+  ph.acomp.setAttribute("transform", "translate(" + mx.toFixed(1) + " " + my.toFixed(1) + ") rotate(" + ang.toFixed(1) + ")");
+  ph.hin.setAttribute("x", ((120 + xe) / 2).toFixed(1));
   ph.lh.textContent = "condenses · " + (mode === "heat" ? "indoor" : "outdoor") + " coil";
   ph.ll.textContent = "evaporates · " + (mode === "heat" ? "outdoor" : "indoor") + " coil";
 }
 function drawMarker() {
-  const yc = 100 - temp * 0.6, xe = 150 - temp * 0.55;
+  const yc = 120 - temp * 1.2, xe = 198 - temp * 1.0;
   let x, y;
-  if (phase < 0.25) { const u = phase / 0.25; x = 172 + (104 - 172) * u; y = 52; }
-  else if (phase < 0.5) { const u = (phase - 0.25) / 0.25; x = 104; y = 52 + (yc - 52) * u; }
-  else if (phase < 0.75) { const u = (phase - 0.5) / 0.25; x = 104 + (xe - 104) * u; y = yc; }
-  else { const u = (phase - 0.75) / 0.25; x = xe + (172 - xe) * u; y = yc + (52 - yc) * u; }
+  if (phase < 0.25) { const u = phase / 0.25; x = 228 + (120 - 228) * u; y = 60; }
+  else if (phase < 0.5) { const u = (phase - 0.25) / 0.25; x = 120; y = 60 + (yc - 60) * u; }
+  else if (phase < 0.75) { const u = (phase - 0.5) / 0.25; x = 120 + (xe - 120) * u; y = yc; }
+  else { const u = (phase - 0.75) / 0.25; x = xe + (228 - xe) * u; y = yc + (60 - yc) * u; }
   ph.m.setAttribute("cx", x.toFixed(1));
   ph.m.setAttribute("cy", y.toFixed(1));
 }
