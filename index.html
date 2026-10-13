@@ -193,12 +193,12 @@ svg[data-mode="heat"] .air.a-odu.air-in, svg[data-mode="cool"] .air.a-idu.air-in
   <circle class="ph-crit" cx="150" cy="47" r="1.6"/>
   <text class="ph-crit-l" x="136" y="38" text-anchor="end">critical point</text>
   <text class="ph-reg" x="52" y="162">liquid</text>
-  <text class="ph-reg" x="160" y="92" text-anchor="middle">liquid + vapour</text>
+  <text class="ph-reg" x="152" y="158" text-anchor="middle">liquid + vapour</text>
   <text class="ph-reg" x="298" y="162" text-anchor="end">vapour</text>
   <path class="ph-tk" d="M40,74 Q85,60 115,60 L228,60 Q262,66 300,94"/>
   <path class="ph-to" id="ph-to" d="M40,121 Q85,111 115,111 L205,111 Q250,117 300,145"/>
-  <text class="ph-tk-l" x="298" y="90" text-anchor="end">T hot</text>
-  <text class="ph-to-l" id="ph-to-l" x="298" y="141" text-anchor="end">T cold</text>
+  <text class="ph-tk-l" x="314" y="80" text-anchor="end">T hot</text>
+  <text class="ph-to-l" id="ph-to-l" x="314" y="131" text-anchor="end">T cold</text>
   <path class="ph-c ph-cond" d="M228,60 L120,60"/>
   <path class="ph-c ph-exp" id="ph-exp" d="M120,60 L120,111"/>
   <path class="ph-c ph-evap" id="ph-evap" d="M120,111 L191,111"/>
@@ -207,10 +207,10 @@ svg[data-mode="heat"] .air.a-odu.air-in, svg[data-mode="cool"] .air.a-idu.air-in
   <path class="ph-a ph-a-exp" id="ph-a-exp" d="M-3.2,-2.6 L3.4,0 L-3.2,2.6 Z" transform="translate(120 86) rotate(90)"/>
   <path class="ph-a ph-a-evap" id="ph-a-evap" d="M-3.2,-2.6 L3.4,0 L-3.2,2.6 Z" transform="translate(156 111) rotate(0)"/>
   <path class="ph-a ph-a-comp" id="ph-a-comp" d="M-3.2,-2.6 L3.4,0 L-3.2,2.6 Z" transform="translate(210 86) rotate(-54)"/>
-  <text class="ph-heat ph-heat-out" x="160" y="50" text-anchor="middle">heat out</text>
+  <text class="ph-heat ph-heat-out" x="185" y="40" text-anchor="middle">heat out</text>
   <text class="ph-heat ph-heat-in" id="ph-heat-in" x="156" y="124" text-anchor="middle">heat in</text>
   <text class="ph-l ph-lh" id="ph-lh" x="298" y="52" text-anchor="end">condenses · indoor coil</text>
-  <text class="ph-l ph-ll" id="ph-ll" x="298" y="115" text-anchor="end">evaporates · outdoor coil</text>
+  <text class="ph-l ph-ll" id="ph-ll" x="120" y="115" text-anchor="start">evaporates · outdoor coil</text>
   <circle class="ph-m" id="ph-m" cx="191" cy="111" r="3.6"/>
 </svg></div></div><figcaption class="iso-legend"><span class="iso-keys"><span class="iso-key"><svg class="iso-swatch" data-mark="red" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>Red: hot high-pressure gas · blue: cold low-pressure liquid</span><span class="iso-key"><svg class="iso-swatch" data-mark="raised" viewBox="0 0 16 10" aria-hidden="true"><path d="M2 4.5 8 1.5 14 4.5 14 6 8 9 2 6Z"/><path class="iso-swatch-crease" d="M2 4.5 8 7.5 14 4.5"/></svg>◀ ▶ or keys 1-4: compress, condense, expand, evaporate — the rest dims</span><span class="iso-key"><svg class="iso-swatch" data-mark="dotted" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>Chevrons ride the pipes; air arrows show heat leaving or entering a coil</span></span><span class="iso-caption">A vapour-compression loop that can run either way. The cycle is four steps: the compressor squeezes low-pressure gas until it is hot; the gas gives up its heat in one coil and condenses to liquid; the expansion valve drops the pressure and the refrigerant turns cold; the cold liquid boils in the other coil, absorbing heat from the air. Keys 1-4 light each step in turn. The four-way valve decides which coil plays the condenser and which the evaporator, so the same loop heats or cools.</span></figcaption></figure></main><script type="module">
 function copHeat(t) { return Math.max(1.8, 2.0 + 0.1045 * (t + 15)); }
@@ -317,11 +317,11 @@ function drawPh() {
   const yc = 120 - temp * 1.2;            // cold isobar: colder outside = lower pressure (lower on the chart)
   const xe = 198 - temp * 1.0;            // vapour leaves the cold coil at the saturated-vapour leg
   ph.to.setAttribute("d", "M40," + (yc + 10).toFixed(1) + " Q85," + yc + " 115," + yc + " L205," + yc + " Q250," + (yc + 6).toFixed(1) + " 300," + (yc + 34).toFixed(1));
-  ph.tol.setAttribute("y", (yc + 30).toFixed(1));
+  ph.tol.setAttribute("y", (yc + 22).toFixed(1));
   ph.exp.setAttribute("d", "M120,60 L120," + yc.toFixed(1));
   ph.evap.setAttribute("d", "M120," + yc.toFixed(1) + " L" + xe.toFixed(1) + "," + yc.toFixed(1));
   ph.comp.setAttribute("d", "M" + xe.toFixed(1) + "," + yc.toFixed(1) + " L228,60");
-  ph.ll.setAttribute("y", (yc + 4).toFixed(1));
+  ph.ll.setAttribute("y", (yc + 24).toFixed(1));
   ph.hin.setAttribute("y", (yc + 13).toFixed(1));
   ph.aexp.setAttribute("transform", "translate(120 " + ((60 + yc) / 2).toFixed(1) + ") rotate(90)");
   ph.aevap.setAttribute("transform", "translate(" + ((120 + xe) / 2).toFixed(1) + " " + yc.toFixed(1) + ") rotate(0)");
