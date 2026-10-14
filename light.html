@@ -191,9 +191,9 @@ svg[data-mode="heat"] .air.a-odu.air-in, svg[data-mode="cool"] .air.a-idu.air-in
   <text class="ph-t" x="8" y="14">pressure</text>
   <text class="ph-t" x="312" y="196" text-anchor="end">enthalpy</text>
   <path class="ph-dome" d="M58,172 C70,120 120,72 185,52 Q205,46 222,58 C236,86 244,130 248,172"/>
-  <text class="ph-reg" x="46" y="100">liquid</text>
+  <text class="ph-reg" x="46" y="82">liquid</text>
   <text class="ph-reg" x="152" y="152" text-anchor="middle">liquid + vapour</text>
-  <text class="ph-reg" x="312" y="100" text-anchor="end">vapour</text>
+  <text class="ph-reg" x="312" y="88" text-anchor="end">vapour</text>
   <path class="ph-tk" id="ph-tk" d="M40,74 Q100,60 130,60 L240,60 Q270,64 300,84"/>
   <path class="ph-to" id="ph-to" d="M40,125 Q100,111 130,111 L240,111 Q270,115 300,135"/>
   <text class="ph-tk-l" id="ph-tk-l" x="286" y="80" text-anchor="start">T hot</text>
@@ -313,19 +313,24 @@ function phGeom() {
   const tHot = mode === "heat" ? 20 : temp;
   const yc = 120 - tCold * 1.2;
   // hot isobar: hotter = higher on the chart (smaller y); keep a visible gap above the cold one
-  const yh = Math.min(60 - (tHot - 20) * 0.8, yc - 16);
+  const yh = Math.min(78 - (tHot - 20) * 0.8, yc - 18);
   return { yc, yh };
 }
-function edgeX(y) {                 // saturated-vapour leg x at height y: same cubic as the dome path
-  const P = [222, 236, 244, 248], Q = [58, 86, 130, 172];
+function legX(y, P, Q) {            // x of a dome leg cubic at height y (binary search, either y direction)
   const bez = (c, t) => { const u = 1 - t; return c[0]*u*u*u + 3*c[1]*t*u*u + 3*c[2]*t*t*u + c[3]*t*t*t; };
+  const up = bez(Q, 1) > bez(Q, 0);
   let lo = 0, hi = 1;
-  for (let i = 0; i < 24; i++) { const t = (lo + hi) / 2; if (bez(Q, t) < y) lo = t; else hi = t; }
+  for (let i = 0; i < 24; i++) { const t = (lo + hi) / 2; const below = bez(Q, t) < y; if (below === up) lo = t; else hi = t; }
   return bez(P, (lo + hi) / 2);
 }
+// dome legs as cubics matching the path: M58,172 C70,120 120,72 185,52 ... C236,86 244,130 248,172
+const LIQ = { P: [58, 70, 120, 185], Q: [172, 120, 72, 52] };
+const VAP = { P: [222, 236, 244, 248], Q: [58, 86, 130, 172] };
+function edgeX(y) { return legX(y, VAP.P, VAP.Q); }   // saturated-vapour leg (steep, right)
+function liqX(y) { return legX(y, LIQ.P, LIQ.Q); }    // saturated-liquid leg (shallow, left)
 function drawPh() {
   const { yc, yh } = phGeom();
-  const xl = 130, xr = edgeX(yc), xh = edgeX(yh) + 4;   // throttle line, vapour at yc, discharge
+  const xl = liqX(yh), xr = edgeX(yc), xh = edgeX(yh) + 14;   // top-left on liquid leg, bottom-right on vapour leg, discharge superheated
   ph.to.setAttribute("d", "M40," + (yc + 14).toFixed(1) + " Q100," + yc + " 130," + yc + " L240," + yc + " Q256," + (yc + 4).toFixed(1) + " 282," + (yc + 22).toFixed(1));
   ph.tk.setAttribute("d", "M40," + (yh + 14).toFixed(1) + " Q100," + yh + " 130," + yh + " L240," + yh + " Q256," + (yh + 4).toFixed(1) + " 282," + (yh + 22).toFixed(1));
   ph.tol.setAttribute("y", (yc + 26).toFixed(1));
@@ -351,7 +356,7 @@ function drawPh() {
 }
 function placeMarker(shown) {
   const { yc, yh } = phGeom();
-  const xl = 130, xr = edgeX(yc), xh = edgeX(yh) + 4;
+  const xl = liqX(yh), xr = edgeX(yc), xh = edgeX(yh) + 14;
   let x = xh, y = yh;                                // rest: compressor discharge
   if (shown === "cond") { x = (xl + xh) / 2; y = yh; }
   else if (shown === "expand") { x = xl; y = (yh + yc) / 2; }
@@ -362,7 +367,7 @@ function placeMarker(shown) {
 }
 function drawMarker() {
   const { yc, yh } = phGeom();
-  const xl = 130, xr = edgeX(yc), xh = edgeX(yh) + 4;
+  const xl = liqX(yh), xr = edgeX(yc), xh = edgeX(yh) + 14;
   let x, y;
   if (phase < 0.25) { const u = phase / 0.25; x = xh + (xl - xh) * u; y = yh; }
   else if (phase < 0.5) { const u = (phase - 0.25) / 0.25; x = xl; y = yh + (yc - yh) * u; }
